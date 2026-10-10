@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#176b3a">
+  <meta name="description" content="Kisan AI helps farmers explore weather, crop care, market prices and government schemes.">
+  <title>Kisan AI | Smart Farming Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home">🌱 Kisan AI</a>
+
+    <button id="menuBtn" class="menu-btn"
+      aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+    <nav id="navigation" aria-label="Main navigation">
+      <a href="#home" data-i18n="navHome">Home</a>
+      <a href="#weather" data-i18n="navWeather">Weather</a>
+      <a href="#disease" data-i18n="navCrop">Crop Health</a>
+      <a href="#mandi" data-i18n="navMandi">Mandi Prices</a>
+      <a href="#schemes" data-i18n="navSchemes">Schemes</a>
+      <a href="#assistant" data-i18n="navAssistant">AI Assistant</a>
+    </nav>
+
+    <label class="language-selector">
+      <span data-i18n="languageLabel">Language</span>
+      <select id="languageSelect" aria-label="Choose language">
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+        <option value="hinglish">Hinglish</option>
+      </select>
+    </label>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div>
+        <p class="eyebrow" data-i18n="heroEyebrow">SMART FARMING • BETTER FUTURE</p>
+        <h1 data-i18n="heroTitle">Your Smart Farming Partner</h1>
+        <p data-i18n="heroDescription">
+          Weather updates, crop guidance, mandi information and government
+          schemes in one place.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#weather" data-i18n="checkWeather">Check Weather</a>
+          <a class="btn btn-light" href="#schemes" data-i18n="exploreSchemes">Explore Schemes</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">🌾</div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="dashboardEyebrow">YOUR FARMING DASHBOARD</p>
+        <h2 data-i18n="servicesTitle">Farmer Services</h2>
+      </div>
+
+      <div class="service-grid">
+        <a class="service-card" href="#weather">
+          <span>🌦️</span>
+          <h3 data-i18n="weatherCard">Weather</h3>
+          <p data-i18n="weatherCardDesc">Current conditions and forecast</p>
+        </a>
+        <a class="service-card" href="#disease">
+          <span>🌿</span>
+          <h3 data-i18n="cropCard">Crop Health</h3>
+          <p data-i18n="cropCardDesc">Upload a crop photo for review</p>
+        </a>
+        <a class="service-card" href="#mandi">
+          <span>📈</span>
+          <h3 data-i18n="mandiCard">Mandi Prices</h3>
+          <p data-i18n="mandiCardDesc">Explore sample market prices</p>
+        </a>
+        <a class="service-card" href="#schemes">
+          <span>🏛️</span>
+          <h3 data-i18n="schemesCard">Government Schemes</h3>
+          <p data-i18n="schemesCardDesc">Find official scheme portals</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="weather" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="weatherEyebrow">PLAN YOUR FARMING</p>
+        <h2 data-i18n="weatherTitle">Weather Forecast</h2>
+      </div>
+
+      <div class="panel">
+        <p data-i18n="weatherDescription">
+          Enter your city to check current weather and a 3-day forecast.
+        </p>
+
+        <form id="weatherForm" class="inline-form">
+          <input id="cityInput" type="text"
+            data-i18n-placeholder="cityPlaceholder"
+            placeholder="Enter city, e.g. Ranchi"
+            autocomplete="address-level2" required>
+          <button class="btn" type="submit" data-i18n="getWeather">Get Weather</button>
+        </form>
+
+        <p id="weatherStatus" class="status" role="status"
+          aria-live="polite" data-i18n="weatherInitial">
+          Enter a city to check the weather.
+        </p>
+        <div id="weatherResult" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="disease" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="cropEyebrow">CROP CARE</p>
+        <h2 data-i18n="cropTitle">Crop Health Check</h2>
+      </div>
+
+      <div class="panel">
+        <p data-i18n="cropDescription">
+          Upload a clear crop or leaf photo to preview it. This demo does not
+          diagnose plant disease.
+        </p>
+
+        <label class="upload-box" for="cropImage">
+          <span>📷</span>
+          <strong data-i18n="selectPhoto">Select crop photo</strong>
+          <small data-i18n="photoFormats">JPG, PNG or WEBP — up to 10 MB</small>
+        </label>
+
+        <input id="cropImage" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        <img id="cropPreview" class="crop-preview" alt="Selected crop preview" hidden>
+        <p id="imageStatus" class="status" role="status" aria-live="polite"></p>
+
+        <div class="notice" data-i18n="cropNotice">
+          For a reliable diagnosis, consult a local Krishi Vigyan Kendra or
+          agricultural expert.
+        </div>
+      </div>
+    </section>
+
+    <section id="mandi" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="mandiEyebrow">MARKET INFORMATION</p>
+        <h2 data-i18n="mandiTitle">Mandi Prices</h2>
+      </div>
+
+      <div class="panel">
+        <form id="mandiForm" class="inline-form">
+          <input id="mandiSearch" type="search"
+            data-i18n-placeholder="mandiPlaceholder"
+            placeholder="Search crop or market">
+          <button id="mandiSearchBtn" class="btn" type="submit"
+            data-i18n="search">Search</button>
+        </form>
+
+        <p class="status" data-i18n="demoPrices">
+          Demo prices only. These are not live market rates.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="cropColumn">Crop</th>
+                <th data-i18n="marketColumn">Market</th>
+                <th data-i18n="priceColumn">Price (₹/quintal)</th>
+                <th data-i18n="typeColumn">Data type</th>
+              </tr>
+            </thead>
+            <tbody id="mandiTable"></tbody>
+          </table>
+        </div>
+
+        <p class="small" data-i18n="mandiDisclaimer">
+          Check the official portal for current prices.
+        </p>
+        <a class="text-link" href="https://agmarknet.gov.in/"
+          target="_blank" rel="noopener noreferrer"
+          data-i18n="agmarknetLink">Visit Agmarknet ↗</a>
+      </div>
+    </section>
+
+    <section id="schemes" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="schemesEyebrow">GOVERNMENT SUPPORT</p>
+        <h2 data-i18n="schemesTitle">Government Schemes</h2>
+      </div>
+
+      <div class="scheme-grid">
+        <article class="scheme-card">
+          <span>💰</span>
+          <h3>PM-KISAN</h3>
+          <p data-i18n="pmKisanDesc">Official portal for scheme information and beneficiary services.</p>
+          <a href="https://pmkisan.gov.in/" target="_blank"
+            rel="noopener noreferrer" data-i18n="officialWebsite">Official website ↗</a>
+        </article>
+
+        <article class="scheme-card">
+          <span>🛡️</span>
+          <h3 data-i18n="insuranceTitle">PM Fasal Bima Yojana</h3>
+          <p data-i18n="insuranceDesc">Information about crop insurance and related services.</p>
+          <a href="https://pmfby.gov.in/" target="_blank"
+            rel="noopener noreferrer" data-i18n="officialWebsite">Official website ↗</a>
+        </article>
+
+        <article class="scheme-card">
+          <span>🧪</span>
+          <h3 data-i18n="soilTitle">Soil Health Card</h3>
+          <p data-i18n="soilDesc">Explore soil testing and soil health information.</p>
+          <a href="https://soilhealth.dac.gov.in/" target="_blank"
+            rel="noopener noreferrer" data-i18n="officialWebsite">Official website ↗</a>
+        </article>
+
+        <article class="scheme-card">
+          <span>🌾</span>
+          <h3>e-NAM</h3>
+          <p data-i18n="enamDesc">Learn about the electronic National Agriculture Market.</p>
+          <a href="https://enam.gov.in/" target="_blank"
+            rel="noopener noreferrer" data-i18n="officialWebsite">Official website ↗</a>
+        </article>
+      </div>
+
+      <p class="small" data-i18n="schemesDisclaimer">
+        Eligibility and application rules can change. Confirm details on
+        official portals before applying.
+      </p>
+    </section>
+
+    <section id="assistant" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="assistantEyebrow">FARMING HELP</p>
+        <h2 data-i18n="assistantTitle">AI Farming Assistant</h2>
+      </div>
+
+      <div class="panel">
+        <div id="chatMessages" class="chat-messages" aria-live="polite">
+          <div class="chat-bubble bot" data-i18n="chatWelcome">
+            Namaste! Ask me about crops, irrigation, soil or schemes.
+          </div>
+        </div>
+
+        <form id="chatForm" class="inline-form">
+          <input id="chatInput" type="text"
+            data-i18n-placeholder="chatPlaceholder"
+            placeholder="Ask a farming question..." required>
+          <button class="btn" type="submit" data-i18n="send">Send</button>
+        </form>
+
+        <p class="small" data-i18n="chatDisclaimer">
+          This is a rule-based demo, not a connected AI model. Verify important
+          farming decisions with an expert.
+        </p>
+      </div>
+    </section>
+
+    <section id="seeds" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="seedsEyebrow">CROP PLANNING</p>
+        <h2 data-i18n="seedsTitle">Seeds & Fertilizers</h2>
+      </div>
+
+      <div class="panel">
+        <p data-i18n="seedsDescription">
+          Choose certified seeds suited to your region and season. Base
+          fertilizer decisions on soil testing and crop recommendations.
+        </p>
+        <ul>
+          <li data-i18n="seedTip1">Check seed variety, label and expiry details.</li>
+          <li data-i18n="seedTip2">Follow the recommended sowing period for your area.</li>
+          <li data-i18n="seedTip3">Follow soil reports and local expert advice for fertilizer doses.</li>
+        </ul>
+        <a class="text-link" href="https://agriwelfare.gov.in/"
+          target="_blank" rel="noopener noreferrer"
+          data-i18n="agricultureLink">Agriculture Department of India ↗</a>
+      </div>
+    </section>
+
+    <section id="profit" class="section">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="profitEyebrow">FARM ECONOMICS</p>
+        <h2 data-i18n="profitTitle">Profit Calculator</h2>
+      </div>
+
+      <div class="panel">
+        <form id="profitForm" class="calculator-grid">
+          <label>
+            <span data-i18n="yieldLabel">Expected yield (quintals)</span>
+            <input id="yieldInput" type="number" min="0" step="any" value="20" required>
+          </label>
+          <label>
+            <span data-i18n="priceLabel">Price per quintal (₹)</span>
+            <input id="priceInput" type="number" min="0" step="any" value="2200" required>
+          </label>
+          <label>
+            <span data-i18n="costLabel">Total costs (₹)</span>
+            <input id="costInput" type="number" min="0" step="any" value="15000" required>
+          </label>
+          <button class="btn" type="submit" data-i18n="calculate">Calculate Profit</button>
+        </form>
+
+        <div id="profitResult" class="result-box" role="status" aria-live="polite"
+          data-i18n="profitInitial">
+          Enter your estimates to calculate expected profit.
+        </div>
+        <p class="small" data-i18n="profitDisclaimer">
+          This is an estimate, not a guarantee of actual earnings.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#home">🌱 Kisan AI</a>
+    <p data-i18n="footerText">Technology to support informed farming decisions.</p>
+  </footer>
+</body>
+</html>
